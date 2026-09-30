@@ -1,0 +1,552 @@
+
+<!DOCTYPE html>
+<html lang="tl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Outing Natin na Cinode Ko, Ah Yeah!</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(180deg, #68d8ff, #008acb 50%, #004e92);
+}
+
+/* SUN */
+.sun {
+    position: absolute;
+    top: 8%;
+    right: 12%;
+    width: 95px;
+    height: 95px;
+    border-radius: 50%;
+    background: #fff4a3;
+    box-shadow: 0 0 40px #fff7b0, 0 0 90px #ffe66d;
+    animation: sunGlow 3s infinite alternate;
+}
+
+@keyframes sunGlow {
+    from { box-shadow: 0 0 30px #fff7b0; }
+    to { box-shadow: 0 0 80px #fff7b0, 0 0 120px #ffe66d; }
+}
+
+/* OCEAN */
+.ocean {
+    position: absolute;
+    bottom: 12%;
+    width: 100%;
+    height: 42%;
+    overflow: hidden;
+}
+
+.wave {
+    position: absolute;
+    width: 200%;
+    height: 200px;
+    left: -50%;
+    border-radius: 43%;
+    animation: waveFlow 8s ease-in-out infinite alternate;
+}
+
+.wave1 {
+    bottom: -65px;
+    background: rgba(107, 232, 255, 0.65);
+    animation-duration: 7s;
+}
+
+.wave2 {
+    bottom: -85px;
+    background: rgba(0, 184, 230, 0.65);
+    animation-duration: 10s;
+    animation-direction: alternate-reverse;
+}
+
+.wave3 {
+    bottom: -110px;
+    background: rgba(0, 104, 190, 0.8);
+    animation-duration: 12s;
+}
+
+@keyframes waveFlow {
+    0% {
+        transform: translateX(-5%) rotate(0deg) scaleY(1);
+        border-radius: 45%;
+    }
+    50% {
+        transform: translateX(2%) rotate(8deg) scaleY(1.15);
+        border-radius: 40%;
+    }
+    100% {
+        transform: translateX(5%) rotate(-5deg) scaleY(0.95);
+        border-radius: 48%;
+    }
+}
+
+/* WATER SHIMMER */
+.shimmer {
+    position: absolute;
+    width: 200%;
+    height: 45%;
+    bottom: 15%;
+    background: repeating-linear-gradient(
+        110deg,
+        transparent 0px,
+        transparent 35px,
+        rgba(255,255,255,0.18) 45px,
+        transparent 55px
+    );
+    animation: shimmerMove 6s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes shimmerMove {
+    from { transform: translateX(-20%); }
+    to { transform: translateX(0%); }
+}
+
+/* SAND */
+.sand {
+    position: absolute;
+    bottom: 0;
+    height: 17%;
+    width: 100%;
+    background: linear-gradient(#ffe7a1, #e9c47b);
+    border-radius: 50% 50% 0 0 / 12% 12% 0 0;
+}
+
+/* BUBBLES */
+.bubble {
+    position: absolute;
+    bottom: -50px;
+    border: 2px solid rgba(255,255,255,0.5);
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    animation: bubbleUp linear infinite;
+    pointer-events: none;
+}
+
+@keyframes bubbleUp {
+    0% {
+        transform: translateY(0) translateX(0) scale(0.5);
+        opacity: 0;
+    }
+    20% { opacity: 0.8; }
+    80% { opacity: 0.6; }
+    100% {
+        transform: translateY(-110vh) translateX(50px) scale(1.3);
+        opacity: 0;
+    }
+}
+
+/* FLOATING EMOJIS */
+.float {
+    position: absolute;
+    bottom: -60px;
+    font-size: 30px;
+    animation: floatUp 9s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    15% { opacity: 1; }
+    100% {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* MAIN CARD */
+.container {
+    position: relative;
+    z-index: 5;
+    width: 90%;
+    max-width: 400px;
+    padding: 35px 25px;
+    border: 2px solid rgba(255,255,255,0.6);
+    border-radius: 30px;
+    text-align: center;
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow: 0 15px 50px rgba(0,40,90,0.3);
+    animation: cardEnter 1s ease-out;
+}
+
+@keyframes cardEnter {
+    from {
+        opacity: 0;
+        transform: translateY(60px) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+h1 {
+    color: white;
+    font-size: 29px;
+    text-shadow: 0 3px 10px #005b99;
+    animation: titleFloat 3s ease-in-out infinite;
+}
+
+@keyframes titleFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-7px); }
+}
+
+.subtitle {
+    color: white;
+    font-size: 14px;
+    margin-bottom: 30px;
+    text-shadow: 0 2px 5px #005b99;
+}
+
+h2 {
+    color: white;
+    font-size: 22px;
+    text-shadow: 0 2px 8px #005b99;
+}
+
+.description {
+    color: white;
+    font-size: 15px;
+    line-height: 1.5;
+    text-shadow: 0 2px 5px #005b99;
+}
+
+input {
+    width: 100%;
+    padding: 15px;
+    margin: 15px 0 20px;
+    border: 2px solid rgba(255,255,255,0.8);
+    border-radius: 15px;
+    outline: none;
+    text-align: center;
+    font-size: 16px;
+    background: rgba(255,255,255,0.9);
+    transition: 0.3s;
+}
+
+input:focus {
+    border-color: #00e5ff;
+    box-shadow: 0 0 20px #80f0ff;
+    transform: scale(1.03);
+}
+
+/* BUTTONS */
+button {
+    padding: 13px 25px;
+    margin: 5px;
+    border: 2px solid rgba(255,255,255,0.5);
+    border-radius: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: translateY(-5px) scale(1.08);
+    filter: brightness(1.15);
+    box-shadow: 0 8px 25px #003c70;
+}
+
+button:active {
+    transform: scale(0.92);
+}
+
+.yes {
+    background: linear-gradient(45deg, #00c853, #64dd17);
+}
+
+.no {
+    background: linear-gradient(45deg, #ff1744, #ff5252);
+}
+
+/* RESULTS */
+#result {
+    color: white;
+    font-size: 19px;
+    font-weight: bold;
+    line-height: 1.5;
+    text-shadow: 0 2px 8px #003c70;
+    margin-top: 20px;
+}
+
+.show {
+    animation: resultPop 0.6s ease;
+}
+
+@keyframes resultPop {
+    0% {
+        transform: scale(0.3);
+        opacity: 0;
+    }
+    70% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* SCREEN TRANSITIONS */
+.hidden {
+    display: none;
+}
+
+.exit {
+    animation: exitScreen 0.5s ease forwards;
+}
+
+@keyframes exitScreen {
+    to {
+        opacity: 0;
+        transform: scale(0.7) translateY(-30px);
+    }
+}
+
+.enter {
+    animation: formEnter 0.8s ease forwards;
+}
+
+@keyframes formEnter {
+    from {
+        opacity: 0;
+        transform: translateY(50px) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* WATER SPLASH */
+.splash {
+    position: fixed;
+    width: 15px;
+    height: 15px;
+    border: 3px solid white;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: splash 0.7s ease-out forwards;
+    pointer-events: none;
+    z-index: 10;
+}
+
+@keyframes splash {
+    to {
+        width: 100px;
+        height: 100px;
+        opacity: 0;
+    }
+}
+
+.footer {
+    color: white;
+    font-size: 12px;
+    margin-top: 20px;
+    text-shadow: 0 2px 5px #004e92;
+}
+
+/* MOBILE */
+@media (max-width: 480px) {
+    .container {
+        padding: 28px 20px;
+    }
+
+    h1 {
+        font-size: 25px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    .sun {
+        width: 65px;
+        height: 65px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- SUN -->
+<div class="sun"></div>
+
+<!-- OCEAN WAVES -->
+<div class="ocean">
+    <div class="wave wave1"></div>
+    <div class="wave wave2"></div>
+    <div class="wave wave3"></div>
+</div>
+
+<!-- WATER REFLECTION -->
+<div class="shimmer"></div>
+
+<!-- SAND -->
+<div class="sand"></div>
+
+<!-- FLOATING EMOJIS -->
+<div class="float" style="left:10%;animation-delay:1s;">🌴</div>
+<div class="float" style="left:30%;animation-delay:4s;">🐚</div>
+<div class="float" style="left:65%;animation-delay:2s;">🏖️</div>
+<div class="float" style="left:85%;animation-delay:5s;">🌺</div>
+
+<!-- WELCOME SCREEN -->
+<div class="container" id="welcome">
+    <h1>🏝️ Outing Natin! 🌊</h1>
+    <p class="subtitle">Outing Natin na Cinode Ko, Ah Yeah! 😎</p>
+
+    <h2>Ready ka na ba? 👀</h2>
+    <p class="description">
+        May itatanong lang ako sa'yo! 🌴
+        <br>
+        Click mo na para malaman! 👀
+    </p>
+
+    <button class="yes" onclick="showForm(event)">
+        Click Me! 🌊
+    </button>
+
+    <div class="footer">☀️ Sea, Sun & Outing 🌊</div>
+</div>
+
+<!-- OUTING SCREEN -->
+<div class="container hidden" id="outing">
+    <h1>🏖️ Outing Natin! 🌊</h1>
+    <p class="subtitle">Outing Natin na Cinode Ko, Ah Yeah! 😎</p>
+
+    <h2>Sama ka sa outing? 👀</h2>
+    <p class="description">Walang atrasan! HAHAHA 😂</p>
+
+    <input type="text" id="name" placeholder="Ilagay ang pangalan mo"
+           maxlength="40">
+
+    <div>
+        <button class="yes" onclick="answer('yes', event)">
+            Oo! 😍
+        </button>
+
+        <button class="no" onclick="answer('no', event)">
+            Hindi 😒
+        </button>
+    </div>
+
+    <p id="result" aria-live="polite"></p>
+
+    <div class="footer">☀️ Sea, Sun & Outing 🌊</div>
+</div>
+
+<script>
+// CREATE RANDOM BUBBLES
+function createBubble() {
+    const bubble = document.createElement("div");
+    bubble.className = "bubble";
+
+    let size = Math.random() * 25 + 10;
+    bubble.style.width = size + "px";
+    bubble.style.height = size + "px";
+    bubble.style.left = Math.random() * 100 + "vw";
+    bubble.style.animationDuration = (Math.random() * 5 + 5) + "s";
+
+    document.body.appendChild(bubble);
+
+    setTimeout(() => bubble.remove(), 11000);
+}
+
+setInterval(createBubble, 500);
+
+// SPLASH EFFECT
+function makeSplash(x, y) {
+    let splash = document.createElement("div");
+    splash.className = "splash";
+    splash.style.left = x + "px";
+    splash.style.top = y + "px";
+
+    document.body.appendChild(splash);
+    setTimeout(() => splash.remove(), 700);
+}
+
+// SHOW NAME INPUT SCREEN
+function showForm(e) {
+    makeSplash(e.clientX, e.clientY);
+
+    let welcome = document.getElementById("welcome");
+    let outing = document.getElementById("outing");
+
+    welcome.classList.add("exit");
+
+    setTimeout(() => {
+        welcome.classList.add("hidden");
+        welcome.classList.remove("exit");
+
+        outing.classList.remove("hidden");
+        outing.classList.add("enter");
+
+        document.getElementById("name").focus();
+    }, 500);
+}
+
+// ANSWER BUTTONS
+function answer(choice, e) {
+    makeSplash(e.clientX, e.clientY);
+
+    let name = document.getElementById("name").value.trim();
+    let result = document.getElementById("result");
+
+    if (name === "") {
+        result.textContent = "Hoy! Pangalan mo muna! 😂";
+    } else if (choice === "yes") {
+        result.textContent =
+            "Dapat lang sumama ka, tangina mo " +
+            name + "! 🤣🎉🏖️";
+    } else {
+        result.textContent =
+            "Tanginamo " + name +
+            "! Sumama ka pa rin! Matulog ka na, hayop ka! 😭🤣";
+    }
+
+    result.classList.remove("show");
+    void result.offsetWidth;
+    result.classList.add("show");
+}
+
+// ENTER KEY
+document.getElementById("name").addEventListener("keydown", function(e) {
+    if (e.key === "Enter") {
+        answer("yes", e);
+    }
+});
+</script>
+
+</body>
+</html>
